@@ -2,7 +2,13 @@
 </script>
 
 <template>
-  <p>
+  <h1 class="title">
     hello
-  </p>
+  </h1>
 </template>
+
+<style lang="scss" scoped>
+.title {
+  color: $red;
+}
+</style>

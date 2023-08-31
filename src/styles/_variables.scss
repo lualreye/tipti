@@ -1,0 +1,46 @@
+// colors 
+@import './colorVariables';
+
+// typography
+@import './externalVariables'; 
+
+// layout
+@import './layoutVariables';
+
+$font: 'Marvel', sans-serif;
+
+// Font weight
+$font-weight-normal: 400;
+$font-weight-light: 300;
+$font-weight-bold: 700;
+
+// Font size
+$h1-font-size: 3rem;
+$h2-font-size: 1.5rem;
+$h3-font-size: 1.125rem;
+
+$body-font-size: 1rem;
+$body-font-small: .875rem;
+$body-font-x-small: .75rem;
+
+h1, h2, h3, h4, h5, h6 {
+  color: $white;
+  font-family: $font;
+  font-weight: $font-weight-normal;
+}
+
+h1 {
+  font-size: $h1-font-size;
+}
+
+h2 {
+  font-size: $h2-font-size;
+}
+
+h3 {
+  font-size: $h2-font-size;
+}
+
+p {
+  font-size: $body-font-size;
+}
