@@ -16,6 +16,15 @@ This will render the series properly and its content according to the endpoints 
 
 This project is mobile friendly!
 
+Thir project is based on SFC
+Single File Component architecture
+
+This project uses:
+
+- Vue3
+- SASS
+- Typescript
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
