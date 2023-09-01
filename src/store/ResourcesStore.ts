@@ -4,6 +4,7 @@ import { ResourceType } from '@/types/ResourcesTypes';
 import { ResourceEnum } from '@/enums/ResourcesEnum';
 import APIStories from '@/services/Resources/Stories';
 import APIComics from '@/services/Resources/Comics';
+import image from '@/assets/comicImage.png';
 
 const comicsService = new APIComics();
 const storiesService = new APIStories();
@@ -41,9 +42,9 @@ export const useResourcesStore = defineStore('ResourcesStore', {
           const comicsData: ResourceType[] = response.data.results.map((comic: any) => ({
             id: comic.id,
             component: ResourceEnum.COMICS,
-            description: comic.description,
+            description: !comic.description.length ? 'NO CONTENT AVAILABLE' : comic.description,
             title: comic.title,
-            image: !comic.thumbnail ? '' : `${comic.thumbnail.path}.${comic.thumbnail.extension}`,
+            image: !comic.thumbnail ? image : `${comic.thumbnail.path}.${comic.thumbnail.extension}`,
           }));
 
           this.comics = comicsData;
@@ -53,9 +54,9 @@ export const useResourcesStore = defineStore('ResourcesStore', {
           const storiesData: ResourceType[] = response.data.results.map((story: any) => ({
             id: story.id,
             component: ResourceEnum.STORIES,
-            description: story.description,
+            description: !story.description.length ? 'NO CONTENT AVAILABLE' : story.description,
             title: story.title,
-            image: !story.thumbnail ? '' : `${story.thumbnail.path}.${story.thumbnail.extension}`,
+            image: !story.thumbnail ? image : `${story.thumbnail.path}.${story.thumbnail.extension}`,
           }));
           this.stories = storiesData;
         }    
