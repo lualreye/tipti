@@ -16,9 +16,9 @@ class APIBase {
     const query = this.createQuery();
 
     if (id) {
-      return `${this.baseUrl}/${endpoint}/${id}?${query}`;
+      return `${this.baseUrl}/${endpoint}/${id}&${query}`;
     }
-    return `${this.baseUrl}/${endpoint}?${query}`;
+    return `${this.baseUrl}/${endpoint}&${query}`;
   }
 
   private createQuery(): string {

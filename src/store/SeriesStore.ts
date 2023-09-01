@@ -9,9 +9,9 @@ interface Roostate {
   series: SeriesType[] | null,
   errorMessage: string | null,
   isLoading: boolean,
-  count: 0,
-  limit: 10,
-  offset: 0,
+  count: number,
+  limit: number,
+  offset: number,
 }
 
 export const useSeriesStore = defineStore('SeriesStore', {
@@ -20,31 +20,34 @@ export const useSeriesStore = defineStore('SeriesStore', {
     errorMessage: null,
     isLoading: false,
     count: 0,
-    limit: 10,
+    limit: 20,
     offset: 0,
   }),
 
   actions: {
     async getSeries(): Promise<void> {
       this.isLoading = true;
+      const query = `series?limit=${this.limit}${this.offset ? `&offset=${this.offset}` : ''}`;
+    
       try {
-        const response = await seriesService.getSeries('series');
-        this.count = response.data.count;
-        this.limit = response.data.limit;
-        this.offset = response.data.offset;
-        this.series = response.data.results.map((serie: any) => {
-          return {
-            id: serie.id,
-            type: serie.type,
-            title: serie.title,
-            image: serie.thumbnail.path + serie.thumbnail.extension,
-            years: `${serie.endYear} - ${serie.startYear}`
-          }
-        })
-        // this.series = response;
+        const response = await seriesService.getSeries(query);
+        const seriesData = response.data.results.map((serie: any) => ({
+          id: serie.id,
+          type: serie.type,
+          title: serie.title,
+          image: `${serie.thumbnail.path}.${serie.thumbnail.extension}`,
+          years: `${serie.endYear} - ${serie.startYear}`,
+        }));
+    
+        if (!this.offset) {
+          this.series = seriesData;
+        } else {
+          this.series?.push(...seriesData);
+        }
       } catch (error: any) {
         this.errorMessage = error.message;
       } finally {
+        this.offset += 20;
         this.isLoading = false;
       }
     }
