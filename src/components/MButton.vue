@@ -6,11 +6,20 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false
+  },
+  type: {
+    type: String,
+    required: false,
+    default: ''
   }
 });
 const emit = defineEmits(['click']);
 
-const btnClass = computed(() => props.isDisabled ? 'btn btn-disabled' : 'btn')
+const btnClass = computed(() => {
+  const disable = props.isDisabled ? 'btn-disabled' : '';
+  const secondary = props.type.length ? 'btn-secondary' : '';
+  return `btn ${secondary} ${disable}`
+})
 
 const handleClick = () => {
   if (!props.isDisabled) {
@@ -39,6 +48,10 @@ const handleClick = () => {
   cursor: pointer;
   border-radius: 4px;
   outline: none;
+}
+
+.btn-secondary {
+  background-color: $red;
 }
 
 .btn-disabled {

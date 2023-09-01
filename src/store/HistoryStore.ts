@@ -34,13 +34,14 @@ export const useHistoryStore = defineStore('HistoryStore', {
       const indexInSaved = this.seriesSaved.findIndex(item => item.id === id);
 
       if (indexInSeen !== -1) {
-        const removedserie = this.seriesSeen.splice(indexInSeen, 1)[0];
+        const removedSerie = this.seriesSeen.splice(indexInSeen, 1)[0];
         if (indexInSaved !== -1) {
           this.seriesSaved.splice(indexInSaved, 1);
         }
-        this.seriesSaved.push(removedserie);
+        this.seriesSaved.push(removedSerie);
       } else if (indexInSaved !== -1) {
-        this.seriesSaved.splice(indexInSaved, 1);
+        const removedSerie = this.seriesSaved.splice(indexInSaved, 1)[0];
+        this.seriesSeen.push(removedSerie); // Agregar de nuevo a seriesSeen
       }
     },
 

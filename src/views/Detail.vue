@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 import ResourceCard from '@/components/Detail/ResourceCard.vue';
@@ -13,6 +13,19 @@ const resourcesStore = useResourcesStore();
 const historyStore = useHistoryStore();
 const seriesStore = useSeriesStore();
 const route = useRoute();
+
+const isSaved = computed(() => {
+  return historyStore.seriesSaved.some(serie => serie.id === seriesStore.serieSelected?.id);
+});
+const buttonType = computed(() => isSaved.value ? 'secondary' : '');
+const buttonContent = computed(() => !isSaved.value ? 'Save' : 'Remove');
+
+function saveRecord() {
+  historyStore.isSavingAllowed(seriesStore.serieSelected?.resourcesNumber!);
+  if (!historyStore.errorMessage) {
+    historyStore.saveSerie(seriesStore.serieSelected?.id!);
+  }
+}
 
 onMounted(async () => {
   const { id } = route.params;
@@ -29,13 +42,6 @@ onMounted(async () => {
     historyStore.addSerieToHistory(seriesStore.serieSelected);
   }
 })
-
-function saveRecord() {
-  historyStore.isSavingAllowed(seriesStore.serieSelected?.resourcesNumber!);
-  if (!historyStore.errorMessage) {
-    historyStore.saveSerie(seriesStore.serieSelected?.id!);
-  }
-}
 </script>
 
 <template>
@@ -54,8 +60,9 @@ function saveRecord() {
         class="detail-wrapper-image">
     <div class="detail-wrapper-button">
       <MButton
+        :type="buttonType"
         @click="saveRecord">
-        Guardar
+        {{ buttonContent }}
       </MButton>
     </div>
     <div class="detail-wrapper-content two-column-layout">
