@@ -1,62 +1,60 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
 
 const props = defineProps({
   image: {
     type: String,
     required: true
   },
-  id: {
-    type: Number,
-    required: true
-  },
   title: {
     type: String,
     required: true
   },
-  years: {
+  description: {
+    type: String,
+    required: true
+  },
+  component: {
     type: String,
     required: true
   }
-});
+})
 
 const showDetails = ref(false);
 </script>
 
 <template>
-  <RouterLink
+  <div
     v-if="image?.length"
-    :to="`/detail/${id}`"
-    class="card"
+    :class="`card-${component}`"
     @mouseenter="showDetails = true"
     @mouseleave="showDetails = false">
+    <h5 class="card">{{ title }}</h5>
     <img
       :src="image"
       :alt="title">
     <Transition name="slide">
       <div
         v-if="showDetails"
-        class="card-details">
-        <div class="card-details-content">
-          <h3>{{ title }}</h3>
-          <p>{{ years }}</p>
+        :class="`card-${component}-details`">
+        <div     :class="`card-${component}-details-content`">
+          <p class="description">{{ description }}</p>
         </div> 
       </div>
     </Transition>
-  </RouterLink>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-.card {
-  width: 240px;
-  height: 320px;
+.card-comics,
+.card-stories {
+  width: 140px;
   position: relative;
   overflow: hidden;
 
   img {
     width: 100%;
-    height: 320px;
+    height: 160px;
     transition: transform 0.3s;
   }
 
@@ -71,15 +69,23 @@ const showDetails = ref(false);
     background-color: $red;
     text-align: center;
     padding: 10px 0;
-    height: 40%;
+    height: 100%;
     &-content {
       padding: 10px 0;
-      height: 90%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       :first-child {
         margin-bottom: 8px;
+      }
+      .description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        line-clamp: 8; 
+        -webkit-box-orient: vertical;
       }
     }
   }
@@ -89,13 +95,13 @@ const showDetails = ref(false);
   top: 100%;
 }
 .slide-enter-to {
-  top: 60%;
+  top: 0%;
 }
 .slide-enter-active {
   transition: all 300ms ease-in;
 }
 .slide-leave-from {
-  top: 60%;
+  top: 0%;
 }
 .slide-leave-to {
   top: 100%;

@@ -7,12 +7,21 @@ import {
 
 // Import web views
 const Home = () => import('@/views/Home.vue');
+const Detail = () => import('@/views/Detail.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
     component: Home,
+    meta: {
+      title: 'Marvel. Encuentra a tus super heroes.'
+    },
+  },
+  {
+    path: '/detail/:id',
+    name: 'Detail',
+    component: Detail,
     meta: {
       title: 'Marvel. Encuentra a tus super heroes.'
     },
