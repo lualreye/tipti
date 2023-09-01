@@ -69,7 +69,8 @@ export const useSeriesStore = defineStore('SeriesStore', {
           image: `${serie.thumbnail.path}.${serie.thumbnail.extension}`,
           years: `${serie.endYear} - ${serie.startYear}`,
           comics: serie.comics,
-          stories: serie.stories
+          stories: serie.stories,
+          resourcesNumber: getResources(serie)
         }
         this.serieSelected = seriesByIdData;
       } catch (error: any) {

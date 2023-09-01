@@ -7,7 +7,7 @@ export type SeriesType = {
   title: string,
   type: SeriesTypeEnum,
   image: string,
-  resourcesNumber?: number,
+  resourcesNumber: number,
   stories?: ResourcesListType,
   events?: ResourcesListType,
   comics?: ResourcesListType,

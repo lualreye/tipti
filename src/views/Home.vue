@@ -48,7 +48,8 @@ onMounted(async () => {
         :id="serie.id"
         :image="serie.image"
         :title="serie.title"
-        :years="serie.years" />
+        :years="serie.years"
+        :resources-number="serie.resourcesNumber" />
     </div>
     <SpinnerLoader v-if="seriesStore.isLoading" />
   </div>
