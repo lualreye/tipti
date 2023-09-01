@@ -12,12 +12,17 @@ class APIBase {
     this.privateKey = `${import.meta.env.VITE_PRIVATE_KEY}`;
   }
 
-  private buildUrl(endpoint: string, id?: string): string {
+  private buildUrl(endpoint: string, id?: string | number): string {
     const query = this.createQuery();
 
     if (id) {
-      return `${this.baseUrl}/${endpoint}/${id}&${query}`;
+      return `${this.baseUrl}/${endpoint}/${id}?${query}`;
     }
+
+    if (query.includes('?')) {
+      return `${this.baseUrl}/${endpoint}?${query}`;
+    }
+
     return `${this.baseUrl}/${endpoint}&${query}`;
   }
 
@@ -43,7 +48,7 @@ class APIBase {
     }
   }
 
-  protected async getById<T>(endpoint: string, id: string): Promise<T> {
+  protected async getById<T>(endpoint: string, id: string | number): Promise<T> {
     const url = this.buildUrl(endpoint, id);
     try {
       const response: AxiosResponse<T> = await axios.get(url);

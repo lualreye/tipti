@@ -1,4 +1,5 @@
 export enum SeriesTypeEnum {
   DETAIL = 'detail',
-  COLLECTION  = 'collection'
+  COLLECTION = 'collection',
+  LIMITED = 'limited'
 }

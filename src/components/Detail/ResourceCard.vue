@@ -1,36 +1,35 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
 
 const props = defineProps({
   image: {
     type: String,
     required: true
   },
-  id: {
-    type: Number,
-    required: true
-  },
   title: {
     type: String,
     required: true
   },
-  years: {
+  description: {
+    type: String,
+    required: true
+  },
+  component: {
     type: String,
     required: true
   }
-});
+})
 
 const showDetails = ref(false);
 </script>
 
 <template>
-  <RouterLink
+  <div
     v-if="image?.length"
-    :to="`/detail/${id}`"
-    class="card"
+    :class="`card-${component}`"
     @mouseenter="showDetails = true"
     @mouseleave="showDetails = false">
+    <h3 class="card">{{ title }}</h3>
     <img
       :src="image"
       :alt="title">
@@ -39,20 +38,21 @@ const showDetails = ref(false);
         v-if="showDetails"
         class="card-details">
         <div class="card-details-content">
-          <h3>{{ title }}</h3>
-          <p>{{ years }}</p>
+          <p>{{ description }}</p>
         </div> 
       </div>
     </Transition>
-  </RouterLink>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-.card {
+.card-comics, comic-stories {
   width: 240px;
   height: 320px;
   position: relative;
   overflow: hidden;
+
+  
 
   img {
     width: 100%;
@@ -89,13 +89,13 @@ const showDetails = ref(false);
   top: 100%;
 }
 .slide-enter-to {
-  top: 60%;
+  top: 0%;
 }
 .slide-enter-active {
   transition: all 300ms ease-in;
 }
 .slide-leave-from {
-  top: 60%;
+  top: 0%;
 }
 .slide-leave-to {
   top: 100%;

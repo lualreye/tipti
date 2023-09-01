@@ -1,4 +1,5 @@
-import { SeriesTypeEnum } from "../enums/SeriesEnum"
+import type { ResourcesListType } from './ResourcesTypes';
+import { SeriesTypeEnum } from '../enums/SeriesEnum';
 
 export type SeriesType = {
   id: number,
@@ -6,5 +7,8 @@ export type SeriesType = {
   title: string,
   type: SeriesTypeEnum,
   image: string,
-  resourcesNumber: number
+  resourcesNumber?: number,
+  stories?: ResourcesListType,
+  events?: ResourcesListType,
+  comics?: ResourcesListType,
 }
