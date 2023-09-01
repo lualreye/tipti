@@ -33,6 +33,12 @@ const props = defineProps({
 
 const showDetails = ref(false);
 const isHistoryRoute = computed(() => route.path.includes('/history'));
+const isSavedRoute = computed(() => route.path.includes('/saved'));
+const isSaved = computed(() => {
+  return historyStore.seriesSaved.some(serie => serie.id === props.id);
+});
+const buttonType = computed(() => isSaved.value ? 'secondary' : '');
+const buttonContent = computed(() => !isSaved.value ? 'Save' : 'Remove');
 
 function saveRecord() {
   historyStore.isSavingAllowed(props.resourcesNumber);
@@ -66,11 +72,12 @@ function saveRecord() {
       </Transition>
     </RouterLink>
     <div
-      v-if="isHistoryRoute"
+      v-if="isHistoryRoute || isSavedRoute"
       class="button">
       <MButton
+        :type="buttonType"
         @click="saveRecord">
-        Save item
+        {{ buttonContent }}
       </MButton>
     </div>
   </div>
