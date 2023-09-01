@@ -4,8 +4,11 @@
   background-color: $gray-dark;
 }
 
-
 body {
   margin: 0;
   padding: 0;
+}
+
+#app {
+  overflow-x: hidden;
 }
