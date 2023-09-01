@@ -3,14 +3,20 @@
 
 <template>
   <div class="app-container">
-    <router-view />
+    <div class="app-container-page container">
+      <router-view />
+    </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .app-container {
   width: 100vw;
   height: 100%;
   min-height: 100vh;
+  &-page {
+    margin: auto;
+    padding: 2rem;
+  }
 }
 </style>
