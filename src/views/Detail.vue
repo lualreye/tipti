@@ -31,16 +31,10 @@ onMounted(async () => {
 })
 
 function saveRecord() {
-  const resourcesTotal = historyStore.getTotalResources;
-  if (resourcesTotal >= 10) {
-    setTimeout(() => {
-      historyStore.errorMessage = 'You have already 10 resources.';
-    }, 5000)
-    historyStore.errorMessage = null;
-    return;
+  historyStore.isSavingAllowed(seriesStore.serieSelected?.resourcesNumber!);
+  if (!historyStore.errorMessage) {
+    historyStore.saveSerie(seriesStore.serieSelected?.id!);
   }
-
-  historyStore.saveSerie(seriesStore.serieSelected?.id!);
 }
 </script>
 

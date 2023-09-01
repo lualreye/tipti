@@ -34,7 +34,7 @@ const menu: MenuType[] = [
         </router-link>
       </div>
       <div
-        v-if="!historyStore.errorMessage"
+        v-if="historyStore.errorMessage"
         class="error-message">
         {{  historyStore.errorMessage }}
       </div>
@@ -70,9 +70,12 @@ const menu: MenuType[] = [
     }
   }
   .error-message {
-    color: $yellow;
+    color: $white;
     font-size: $h3-font-size;
     background-color: $red;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 8px;
   }
 }
 </style>

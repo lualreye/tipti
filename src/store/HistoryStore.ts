@@ -42,12 +42,28 @@ export const useHistoryStore = defineStore('HistoryStore', {
       } else if (indexInSaved !== -1) {
         this.seriesSaved.splice(indexInSaved, 1);
       }
+    },
+
+    isSavingAllowed(resourcesNumber: number): void {
+      if (resourcesNumber >= 10) {
+        this.errorMessage = 'Resources exceeded the total number of items.';
+        setTimeout(() => {
+          this.errorMessage = null;
+        }, 5000);
+      } else if (this.getTotalResources >= 10) {
+        this.errorMessage = 'You already have 10 resources.';
+        setTimeout(() => {
+          this.errorMessage = null;
+        }, 5000);
+      } else {
+        this.errorMessage = null;
+      }
     }
   },
 
   getters: {
     getTotalResources(): number {
-      const total = this.seriesSaved.reduce((accumulator, currentObject) => {
+      const total: number = this.seriesSaved.reduce((accumulator, currentObject) => {
         if (currentObject.hasOwnProperty('number')) {
           return accumulator + currentObject.resourcesNumber;
         } else {
