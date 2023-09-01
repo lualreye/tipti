@@ -53,3 +53,11 @@ Run project
 ```bash
   npm run dev
 ```
+
+## Run Unit Test
+
+Run vitest
+
+```bash
+  npm run test:unit
+```
