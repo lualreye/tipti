@@ -35,6 +35,15 @@ const showDetails = ref(false);
 const isHistoryRoute = computed(() => route.path.includes('/history'));
 
 function saveRecord() {
+  const resourcesTotal = historyStore.getTotalResources;
+  if (resourcesTotal >= 10) {
+    setTimeout(() => {
+      historyStore.errorMessage = 'You have already 10 resources.';
+    }, 5000)
+    historyStore.errorMessage = null;
+    return;
+  }
+
   historyStore.saveSerie(props.id);
 }
 </script>

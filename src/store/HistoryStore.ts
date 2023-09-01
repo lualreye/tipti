@@ -45,6 +45,19 @@ export const useHistoryStore = defineStore('HistoryStore', {
     }
   },
 
+  getters: {
+    getTotalResources(): number {
+      const total = this.seriesSaved.reduce((accumulator, currentObject) => {
+        if (currentObject.hasOwnProperty('number')) {
+          return accumulator + currentObject.resourcesNumber;
+        } else {
+          return accumulator;
+        }
+      }, 0);
+    
+      return total;
+    }
+  }
 });
 
 export default useHistoryStore;

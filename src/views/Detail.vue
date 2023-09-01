@@ -7,6 +7,7 @@ import { ResourceEnum } from '@/enums/ResourcesEnum';
 import useResourcesStore from '@/store/ResourcesStore';
 import useHistoryStore from '@/store/HistoryStore';
 import useSeriesStore from '@/store/SeriesStore';
+import MButton from '@/components/MButton.vue';
 
 const resourcesStore = useResourcesStore();
 const historyStore = useHistoryStore();
@@ -28,6 +29,19 @@ onMounted(async () => {
     historyStore.addSerieToHistory(seriesStore.serieSelected);
   }
 })
+
+function saveRecord() {
+  const resourcesTotal = historyStore.getTotalResources;
+  if (resourcesTotal >= 10) {
+    setTimeout(() => {
+      historyStore.errorMessage = 'You have already 10 resources.';
+    }, 5000)
+    historyStore.errorMessage = null;
+    return;
+  }
+
+  historyStore.saveSerie(seriesStore.serieSelected?.id!);
+}
 </script>
 
 <template>
@@ -44,6 +58,12 @@ onMounted(async () => {
         :src="seriesStore.serieSelected.image"
         :alt="seriesStore.serieSelected.title"
         class="detail-wrapper-image">
+    <div class="detail-wrapper-button">
+      <MButton
+        @click="saveRecord">
+        Guardar
+      </MButton>
+    </div>
     <div class="detail-wrapper-content two-column-layout">
       <div class="col-1">
         <h2 class="detail-wrapper-content-title">
@@ -103,6 +123,10 @@ onMounted(async () => {
     height: 420px;
     object-fit: cover;
     object-position: center bottom;
+  }
+  &-button {
+    width: 100%;
+    margin: 24px;
   }
   &-content {
     display: flex;

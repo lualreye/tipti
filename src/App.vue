@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { MenuType } from './types/MenuTypes';
+import useHistoryStore from './store/HistoryStore';
+
+const historyStore = useHistoryStore();
 
 const menu: MenuType[] = [
   {
@@ -30,6 +33,11 @@ const menu: MenuType[] = [
           {{ item.name }}
         </router-link>
       </div>
+      <div
+        v-if="!historyStore.errorMessage"
+        class="error-message">
+        {{  historyStore.errorMessage }}
+      </div>
       <router-view />
     </div>
   </div>
@@ -40,6 +48,7 @@ const menu: MenuType[] = [
   width: 100vw;
   height: 100%;
   min-height: 100vh;
+  font-family: $font;
   &-page {
     margin: auto;
     padding: 2rem;
@@ -52,7 +61,6 @@ const menu: MenuType[] = [
     justify-content: flex-end;
     align-items: baseline;
     font-size: $h2-font-size;
-    font-family: $font;
     .item {
       color: $yellow;
       text-decoration: none;
@@ -60,6 +68,11 @@ const menu: MenuType[] = [
     .exact-item {
       color: $red;
     }
+  }
+  .error-message {
+    color: $yellow;
+    font-size: $h3-font-size;
+    background-color: $red;
   }
 }
 </style>

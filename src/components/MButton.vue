@@ -31,6 +31,7 @@ const handleClick = () => {
 <style lang="scss" scoped>
 /* Estilos de botón de ejemplo */
 .btn {
+  width: 100%;
   padding: 10px 20px;
   background-color: $btn-color;
   color: $white;
