@@ -8,6 +8,7 @@ import {
 // Import web views
 const Home = () => import('@/views/Home.vue');
 const Detail = () => import('@/views/Detail.vue');
+const History = () => import('@/views/History.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -15,7 +16,15 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Home',
     component: Home,
     meta: {
-      title: 'Marvel. Encuentra a tus super heroes.'
+      title: 'Marvel. Find your best stories.'
+    },
+  },
+  {
+    path: '/history',
+    name: 'History',
+    component: History,
+    meta: {
+      title: 'Marvel. Check what you have seen.'
     },
   },
   {
@@ -23,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Detail',
     component: Detail,
     meta: {
-      title: 'Marvel. Encuentra a tus super heroes.'
+      title: 'Story Detail.'
     },
   },
 ];

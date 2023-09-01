@@ -5,9 +5,11 @@ import { useRoute } from 'vue-router';
 import ResourceCard from '@/components/Detail/ResourceCard.vue';
 import { ResourceEnum } from '@/enums/ResourcesEnum';
 import useResourcesStore from '@/store/ResourcesStore';
+import useHistoryStore from '@/store/HistoryStore';
 import useSeriesStore from '@/store/SeriesStore';
 
 const resourcesStore = useResourcesStore();
+const historyStore = useHistoryStore();
 const seriesStore = useSeriesStore();
 const route = useRoute();
 
@@ -21,6 +23,9 @@ onMounted(async () => {
   }
   if (seriesStore.serieSelected?.stories?.items.length) {
     await resourcesStore.getResources(ResourceEnum.STORIES, seriesStore.serieSelected.id);
+  }
+  if (seriesStore.serieSelected) {
+    historyStore.addSerieToHistory(seriesStore.serieSelected);
   }
 })
 </script>
