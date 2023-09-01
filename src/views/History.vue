@@ -6,14 +6,16 @@ const historyStore = useHistoryStore();
 </script>
 
 <template>
-  <h1 v-if="!historyStore.seriesSeen.length">
-    No series seen!
+  <h1
+    v-if="!historyStore.seriesSeen.length"
+    class="title">
+    NO HISTORY RECORD!
   </h1>
   <div
     v-else
     class="home-wrapper">
     <h1 class="home-wrapper-title">
-      NO HISTORY RECORD!
+      Series seen!
     </h1>
     <div
       v-if="historyStore.seriesSeen.length"
@@ -24,12 +26,20 @@ const historyStore = useHistoryStore();
         :id="serie.id"
         :image="serie.image"
         :title="serie.title"
-        :years="serie.years" />
+        :years="serie.years"
+        :resources-number="serie.resourcesNumber" />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.title {
+  color: $red;
+  text-align: center;
+  font-size: 5rem;
+  font-weight: $font-weight-bold;
+  margin-bottom: 3rem;
+}
 .home-wrapper {
   &-title {
     color: $red;

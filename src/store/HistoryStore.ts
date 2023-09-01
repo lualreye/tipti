@@ -18,7 +18,7 @@ export const useHistoryStore = defineStore('HistoryStore', {
   }),
 
   actions: {
-    addSerieToHistory(serie: SeriesType) {
+    addSerieToHistory(serie: SeriesType): void {
       if (this.seriesSeen.length) {
         const idExists = this.seriesSeen.some(serieSeen => serieSeen.id === serie.id);
         if (!idExists) {
@@ -27,8 +27,24 @@ export const useHistoryStore = defineStore('HistoryStore', {
       } else {
         this.seriesSeen.push(serie);
       }
+    },
+
+    saveSerie(id: number): void {
+      const indexInSeen = this.seriesSeen.findIndex(item => item.id === id);
+      const indexInSaved = this.seriesSaved.findIndex(item => item.id === id);
+
+      if (indexInSeen !== -1) {
+        const removedserie = this.seriesSeen.splice(indexInSeen, 1)[0];
+        if (indexInSaved !== -1) {
+          this.seriesSaved.splice(indexInSaved, 1);
+        }
+        this.seriesSaved.push(removedserie);
+      } else if (indexInSaved !== -1) {
+        this.seriesSaved.splice(indexInSaved, 1);
+      }
     }
-  }
+  },
+
 });
 
 export default useHistoryStore;

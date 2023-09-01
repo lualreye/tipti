@@ -9,6 +9,7 @@ import {
 const Home = () => import('@/views/Home.vue');
 const Detail = () => import('@/views/Detail.vue');
 const History = () => import('@/views/History.vue');
+const Saved = () => import('@/views/Saved.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,6 +26,14 @@ const routes: Array<RouteRecordRaw> = [
     component: History,
     meta: {
       title: 'Marvel. Check what you have seen.'
+    },
+  },
+  {
+    path: '/saved',
+    name: 'Saved',
+    component: Saved,
+    meta: {
+      title: 'Marvel. Check what you have saved.'
     },
   },
   {

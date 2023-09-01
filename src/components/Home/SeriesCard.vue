@@ -1,6 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
+
+import useHistoryStore from '@/store/HistoryStore';
+import MButton from '../MButton.vue';
+
+const route = useRoute();
+const historyStore = useHistoryStore();
 
 const props = defineProps({
   image: {
@@ -18,36 +24,62 @@ const props = defineProps({
   years: {
     type: String,
     required: true
+  },
+  resourcesNumber: {
+    type: Number,
+    required: true
   }
 });
 
 const showDetails = ref(false);
+const isHistoryRoute = computed(() => route.path.includes('/history'));
+
+function saveRecord() {
+  historyStore.saveSerie(props.id);
+}
 </script>
 
 <template>
-  <RouterLink
-    v-if="image?.length"
-    :to="`/detail/${id}`"
-    class="card"
-    @mouseenter="showDetails = true"
-    @mouseleave="showDetails = false">
-    <img
-      :src="image"
-      :alt="title">
-    <Transition name="slide">
-      <div
-        v-if="showDetails"
-        class="card-details">
-        <div class="card-details-content">
-          <h3>{{ title }}</h3>
-          <p>{{ years }}</p>
-        </div> 
-      </div>
-    </Transition>
-  </RouterLink>
+  <div class="wrapper">
+    <RouterLink
+      v-if="image?.length"
+      :to="`/detail/${id}`"
+      class="card"
+      @mouseenter="showDetails = true"
+      @mouseleave="showDetails = false">
+      <img
+        :src="image"
+        :alt="title">
+      <Transition name="slide">
+        <div
+          v-if="showDetails"
+          class="card-details">
+          <div class="card-details-content">
+            <h3>{{ title }}</h3>
+            <p>{{ years }}</p>
+            <p>Resources: {{ resourcesNumber }}</p>
+          </div>
+        </div>
+      </Transition>
+    </RouterLink>
+    <div
+      v-if="isHistoryRoute"
+      class="button">
+      <MButton
+        @click="saveRecord">
+        Save item
+      </MButton>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
 .card {
   width: 240px;
   height: 320px;
@@ -78,8 +110,9 @@ const showDetails = ref(false);
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      :first-child {
-        margin-bottom: 8px;
+      gap: 4px;
+      .button {
+        width: 24px;
       }
     }
   }
