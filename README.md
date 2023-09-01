@@ -1,6 +1,6 @@
 ## Acknowledgements
 
-- [Live project](https://tipti.netlify.app/)
+- [Live project](https://master--tipti.netlify.app/)
 
 # Tipti Challenge
 
