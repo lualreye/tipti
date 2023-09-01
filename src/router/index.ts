@@ -6,15 +6,15 @@ import {
 } from 'vue-router';
 
 // Import web views
-const WebIndex = () => import('@/views/WebIndex.vue');
+const Home = () => import('@/views/Home.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'NabuxWeb',
-    component: WebIndex,
+    name: 'Home',
+    component: Home,
     meta: {
-      title: 'Marvel. Encuentra a tus super heroes'
+      title: 'Marvel. Encuentra a tus super heroes.'
     },
   },
 ];
