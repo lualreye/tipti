@@ -6,12 +6,18 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:unit": "vitest --environment jsdom --root src/"
   },
   "dependencies": {
+    "@types/jsdom": "^21.1.2",
+    "@vue/test-utils": "^2.4.1",
     "axios": "^1.5.0",
+    "jsdom": "^22.1.0",
     "md5": "^2.3.0",
     "pinia": "^2.1.6",
+    "start-server-and-test": "^2.0.0",
+    "vitest": "^0.34.3",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },

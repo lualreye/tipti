@@ -37,7 +37,7 @@ const showDetails = ref(false);
       <div
         v-if="showDetails"
         :class="`card-${component}-details`">
-        <div     :class="`card-${component}-details-content`">
+        <div :class="`card-${component}-details-content`">
           <p class="description">{{ description }}</p>
         </div> 
       </div>
