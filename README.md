@@ -1,18 +1,46 @@
-# Vue 3 + TypeScript + Vite
+## Acknowledgements
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+- [Live project](https://tipti.netlify.app/)
 
-## Recommended IDE Setup
+# Tipti Challenge
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+This will render the series properly and its content according to the endpoints suggested
 
-## Type Support For `.vue` Imports in TS
+|         Home         |         Detail         |
+| :------------------: | :--------------------: |
+| ![](./docs/home.png) | ![](./docs/detail.png) |
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+|         History         |         Saved         |
+| :---------------------: | :-------------------: |
+| ![](./docs/history.png) | ![](./docs/saved.png) |
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+This project is mobile friendly!
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`VITE_API_URL`=https://gateway.marvel.com/v1/public
+
+`VITE_PUBLIC_KEY`=4eeb3d4b7ff9d593756a3e3dd32bddc4
+`VITE_PRIVATE_KEY`=29ff19ff3a517abb1bc0292c28380dedcc6708b3
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone git@github.com:lualreye/tipti.git
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Run project
+
+```bash
+  npm run dev
+```
